@@ -1,4 +1,4 @@
-package com.example.composesandbox
+package com.example.composesandbox.components
 
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text

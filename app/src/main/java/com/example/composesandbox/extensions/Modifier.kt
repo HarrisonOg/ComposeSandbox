@@ -1,4 +1,4 @@
-package com.example.composesandbox
+package com.example.composesandbox.extensions
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent

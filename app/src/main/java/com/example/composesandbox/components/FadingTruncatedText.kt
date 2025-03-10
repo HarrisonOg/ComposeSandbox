@@ -1,4 +1,4 @@
-package com.example.composesandbox
+package com.example.composesandbox.components
 
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.composesandbox.extensions.horizontalFadeGradient
 
 @Composable
 fun FadingTruncatedText(
