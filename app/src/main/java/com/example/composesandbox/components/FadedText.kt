@@ -10,7 +10,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
@@ -40,18 +39,20 @@ fun FadedText(
         TextAlign.Left
     }
 
-
-    SubcomposeLayout { constraints ->
+    SubcomposeLayout(
+        modifier = modifier,
+    ) { constraints ->
         val textLayoutResult = textMeasurer.measure(
             text = text,
-            overflow = TextOverflow.Visible,
             maxLines = 1,
-            style = style,
+            style = style.copy(
+                textAlign = textAlignment
+            ),
             constraints = constraints,
         )
 
-        val visibleCharacters = textLayoutResult.getLineEnd(0, true) + 1
-        val truncatedText = if (truncationDirection == TruncationDirection.START) {
+        val visibleCharacters = textLayoutResult.getLineEnd(0, true)
+        val truncatedText = if (fadeDirection == FadeDirection.LEFT) {
             text.takeLast(visibleCharacters)
         } else {
             text.take(visibleCharacters)
@@ -94,7 +95,7 @@ enum class TruncationDirection {
 fun FadingTextPreview() {
     FadedText(
         text = "somesubdomain.google.com.roguewebsite.com",
-        modifier = Modifier.width(175.dp),
+        modifier = Modifier.width(200.dp),
         style = TextStyle(fontSize = 16.sp),
         truncationDirection = TruncationDirection.START,
         fadeLength = 50.dp,
@@ -109,7 +110,7 @@ fun FadingTextPreview() {
 fun EndFadingTextPreview() {
     FadedText(
         text = "somesubdomain.google.com.roguewebsite.com",
-        modifier = Modifier.width(175.dp),
+        modifier = Modifier.width(200.dp),
         style = TextStyle(fontSize = 16.sp),
         truncationDirection = TruncationDirection.END,
         fadeLength = 60.dp,
@@ -127,7 +128,7 @@ fun EndRTLFadingTextPreview() {
     ) {
         FadedText(
             text = "somesubdomain.google.com.roguewebsite.com",
-            modifier = Modifier.width(175.dp),
+            modifier = Modifier.width(200.dp),
             style = TextStyle(fontSize = 16.sp),
             truncationDirection = TruncationDirection.END,
             fadeLength = 60.dp,

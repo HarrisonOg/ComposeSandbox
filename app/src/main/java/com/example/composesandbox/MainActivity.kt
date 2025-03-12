@@ -1,6 +1,7 @@
 package com.example.composesandbox
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,9 +16,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composesandbox.components.FadedText
@@ -32,9 +36,9 @@ class MainActivity : ComponentActivity() {
             ComposeSandboxTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column {
-                        Spacer(modifier = Modifier.fillMaxWidth().height(150.dp))
-                        Text("50.dp", modifier = Modifier.padding(innerPadding))
+                        Spacer(modifier = Modifier.padding(innerPadding))
                         Spacer(Modifier.fillMaxWidth().height(20.dp))
+                        Text("LTR Start Fade")
                         FadedText(
                             text = "somesubdomain.google.com.roguewebsite.com",
                             modifier = Modifier.width(200.dp).border(
@@ -47,6 +51,7 @@ class MainActivity : ComponentActivity() {
                             fadeLength = 100.dp,
                         )
                         Spacer(Modifier.fillMaxWidth().height(20.dp))
+                        Text("LTR End Fade")
                         FadedText(
                             text = "somesubdomain.google.com.roguewebsite.com",
                             modifier = Modifier.width(200.dp).border(
@@ -56,9 +61,10 @@ class MainActivity : ComponentActivity() {
                             ),
                             style = TextStyle(fontSize = 16.sp),
                             truncationDirection = TruncationDirection.END,
-                            fadeLength = 100.dp,
+                            fadeLength = 50.dp,
                         )
                         Spacer(Modifier.fillMaxWidth().height(20.dp))
+                        Text("Regular Text box LTR")
                         Text(
                             text = "somesubdomain.google.co",
                             modifier = Modifier.width(200.dp).border(
